@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import HomeContainer from './containers/HomeContainer';
 import ProductContainer from './containers/ProductContainer';
+import CartContainer from './containers/CartContainer';
 
 function App() {
   const openMenu = () => {
@@ -44,6 +45,7 @@ function App() {
         <main className='main'>
           <div className='content'>
             <Route path='/products/:id' component={ProductContainer} />
+            <Route path='/cart/:id?' component={CartContainer} />
             <Route path='/' exact component={HomeContainer} />
           </div>
         </main>
