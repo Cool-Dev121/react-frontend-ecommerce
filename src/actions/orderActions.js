@@ -15,3 +15,9 @@ export const fetchOrder = orderId => dispatch => {
     .then(res => res.json())
     .then(order => dispatch({ type: 'FETCH_ORDER', payload: order, success: true }));
 };
+
+export const listMyOrders = () => dispatch => {
+  fetch(`/orders`)
+    .then(res => res.json())
+    .then(order => dispatch({ type: 'FETCH_MY_ORDERS', payload: order, success: true }));
+};

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProducts, saveProduct, deleteProduct } from '../actions/productActions';
 
-const NewProductContainer = props => {
+const ProductsContainer = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
   const [name, setName] = useState('');
@@ -166,4 +166,4 @@ const NewProductContainer = props => {
   );
 };
 
-export default NewProductContainer;
+export default ProductsContainer;

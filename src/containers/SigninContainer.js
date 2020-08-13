@@ -13,6 +13,7 @@ const SigninContainer = props => {
 
   useEffect(() => {
     if (userInfo) {
+      console.log(!!userInfo);
       props.history.push(redirect);
     }
     return () => {

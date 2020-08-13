@@ -6,11 +6,12 @@ import CartContainer from './containers/CartContainer';
 import SigninContainer from './containers/SigninContainer';
 import { useSelector } from 'react-redux';
 import RegisterContainer from './containers/RegisterContainer';
-import NewProductContainer from './containers/NewProductContainer';
+import ProductsContainer from './containers/ProductsContainer';
 import ShippingContainer from './containers/ShippingContainer';
 import PaymentContainer from './containers/PaymentContainer';
 import PlaceOrderContainer from './containers/PlaceOrderContainer';
 import OrderContainer from './containers/OrderContainer';
+import ProfileContainer from './containers/ProfileContainer';
 
 function App() {
   const userSignin = useSelector(state => state.userSignin);
@@ -57,7 +58,8 @@ function App() {
           <div className='content'>
             <Route path='/register' component={RegisterContainer} />
             <Route path='/signin' component={SigninContainer} />
-            <Route path='/products' exact component={NewProductContainer} />
+            <Route path='/profile' component={ProfileContainer} />
+            <Route path='/products' exact component={ProductsContainer} />
             <Route path='/shipping' component={ShippingContainer} />
             <Route path='/payment' component={PaymentContainer} />
             <Route path='/placeorder' component={PlaceOrderContainer} />

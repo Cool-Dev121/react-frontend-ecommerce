@@ -32,3 +32,15 @@ export const orderDetailsReducer = (
       return state;
   }
 };
+
+export const myOrderListReducer = (state = { orders: [], success: false }, action) => {
+  switch (action.type) {
+    case 'FETCH_MY_ORDERS':
+      return {
+        orders: action.payload,
+        success: true,
+      };
+    default:
+      return state;
+  }
+};
