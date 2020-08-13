@@ -4,7 +4,7 @@ import HomeContainer from './containers/HomeContainer';
 import ProductContainer from './containers/ProductContainer';
 import CartContainer from './containers/CartContainer';
 import SigninContainer from './containers/SigninContainer';
-import { useSelector } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import RegisterContainer from './containers/RegisterContainer';
 import ProductsContainer from './containers/ProductsContainer';
 import ShippingContainer from './containers/ShippingContainer';
@@ -13,10 +13,14 @@ import PlaceOrderContainer from './containers/PlaceOrderContainer';
 import OrderContainer from './containers/OrderContainer';
 import ProfileContainer from './containers/ProfileContainer';
 import OrdersContainer from './containers/OrdersContainer';
+import { filterProductsByCategory } from './actions/productActions';
 
 function App() {
   const userSignin = useSelector(state => state.userSignin);
   const { user } = userSignin.userInfo;
+  const productList = useSelector(state => state.productList);
+  const { products, filteredProducts } = productList;
+  const dispatch = useDispatch();
 
   const openMenu = () => {
     document.querySelector('.sidebar').classList.add('open');
@@ -24,6 +28,11 @@ function App() {
 
   const closeMenu = () => {
     document.querySelector('.sidebar').classList.remove('open');
+  };
+
+  const categoryHandler = category => {
+    closeMenu();
+    dispatch(filterProductsByCategory(products, category));
   };
 
   return (
@@ -56,12 +65,21 @@ function App() {
           <button className='sidebar-close-button' onClick={closeMenu}>
             X
           </button>
-          <ul>
+          <ul className='categories'>
             <li>
-              <a href='index.html'>Pants</a>
+              <button type='button' onClick={e => categoryHandler(e.target.innerText)}>
+                All
+              </button>
             </li>
             <li>
-              <a href='index.html'>Shirts</a>
+              <button type='button' onClick={e => categoryHandler(e.target.innerText)}>
+                Pants
+              </button>
+            </li>
+            <li>
+              <button type='button' onClick={e => categoryHandler(e.target.innerText)}>
+                Shirts
+              </button>
             </li>
           </ul>
         </aside>

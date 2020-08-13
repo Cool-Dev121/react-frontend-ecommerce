@@ -49,9 +49,9 @@ const OrdersContainer = props => {
                 <td>{order.created_at}</td>
                 <td>${order.totalPrice}</td>
                 <td>{order.user.first_name}</td>
-                <td>{order.isPaid}</td>
+                <td>{order.isPaid.toString()}</td>
                 <td>{order.paidAt}</td>
-                <td>{order.isDelivered}</td>
+                <td>{order.isDelivered.toString()}</td>
                 <td>{order.deliveredAt}</td>
                 <td>
                   <Link to={`/orders/${order.id}`} className='button secondary'>
