@@ -85,3 +85,15 @@ export const deleteProduct = product => dispatch => {
     },
   }).then(product => dispatch({ type: 'DELETE_PRODUCT', payload: product, success: true }));
 };
+
+export const saveProductReview = (productId, review) => dispatch => {
+  fetch(`/products/${productId}/reviews`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ review }),
+  })
+    .then(res => res.json())
+    .then(review => dispatch({ type: 'SAVE_PRODUCT_REVIEW', payload: review, success: true }));
+};

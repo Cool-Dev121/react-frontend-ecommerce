@@ -6,6 +6,7 @@ import {
   productDetailsReducer,
   productSaveReducer,
   productDeleteReducer,
+  productReviewSaveReducer,
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userSigninReducer, userRegisterReducer, userUpdateReducer } from './reducers/userReducers';
@@ -28,6 +29,7 @@ const store = createStore(
     productDetails: productDetailsReducer,
     productSave: productSaveReducer,
     productDelete: productDeleteReducer,
+    productReviewSave: productReviewSaveReducer,
     cart: cartReducer,
     userSignin: userSigninReducer,
     userRegister: userRegisterReducer,

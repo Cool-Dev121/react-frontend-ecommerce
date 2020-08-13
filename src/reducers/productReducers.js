@@ -37,7 +37,7 @@ export const productListReducer = (
   }
 };
 
-export const productDetailsReducer = (state = { product: {} }, action) => {
+export const productDetailsReducer = (state = { product: { reviews: [] } }, action) => {
   switch (action.type) {
     case 'GET_PRODUCT':
       return {
@@ -68,6 +68,19 @@ export const productDeleteReducer = (state = { product: {}, success: false }, ac
       return {
         success: true,
         product: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const productReviewSaveReducer = (state = { success: false }, action) => {
+  switch (action.type) {
+    case 'SAVE_PRODUCT_REVIEW':
+      return {
+        success: true,
+        review: action.payload,
       };
 
     default:

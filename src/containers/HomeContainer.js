@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../actions/productActions';
 import Filter from '../components/Filter';
+import Rating from '../components/Rating';
 
 const HomeContainer = props => {
   const productList = useSelector(state => state.productList);
@@ -36,7 +37,7 @@ const HomeContainer = props => {
                   <div className='product-brand'>{product.brand}</div>
                   <div className='product-price'>${product.price}</div>
                   <div className='product-rating'>
-                    {product.rating} Stars ({product.numReviews} Reviews)
+                    <Rating value={product.rating} text={product.numReviews + ' Reviews'} />
                   </div>
                 </div>
               </li>
