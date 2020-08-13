@@ -41,7 +41,7 @@ const SigninContainer = props => {
             <input type='password' id='password' name='password' onChange={e => setPassword(e.target.value)} />
           </li>
           <li>
-            <button type='submit' className='button primary'>
+            <button onClick={submitHandler} type='submit' className='button primary'>
               Sign In
             </button>
           </li>

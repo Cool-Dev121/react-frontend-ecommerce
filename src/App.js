@@ -10,6 +10,7 @@ import NewProductContainer from './containers/NewProductContainer';
 import ShippingContainer from './containers/ShippingContainer';
 import PaymentContainer from './containers/PaymentContainer';
 import PlaceOrderContainer from './containers/PlaceOrderContainer';
+import OrderContainer from './containers/OrderContainer';
 
 function App() {
   const userSignin = useSelector(state => state.userSignin);
@@ -60,6 +61,7 @@ function App() {
             <Route path='/shipping' component={ShippingContainer} />
             <Route path='/payment' component={PaymentContainer} />
             <Route path='/placeorder' component={PlaceOrderContainer} />
+            <Route path='/orders/:id' component={OrderContainer} />
             <Route path='/products/:id' exact component={ProductContainer} />
             <Route path='/cart/:id?' component={CartContainer} />
             <Route path='/' exact component={HomeContainer} />

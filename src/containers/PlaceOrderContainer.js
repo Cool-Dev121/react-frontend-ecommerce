@@ -4,9 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 import { Link } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { createOrder } from '../actions/orderActions';
 
 const PlaceOrderContainer = props => {
   const cart = useSelector(state => state.cart);
+  const orderCreate = useSelector(state => state.orderCreate);
+  const userSignin = useSelector(state => state.userSignin);
+  const { success, order } = orderCreate;
+  const { userInfo } = userSignin;
+  const user_id = userInfo.user.id;
+
   const { cartItems, shipping, payment } = cart;
 
   if (!shipping.address) {
@@ -23,13 +30,19 @@ const PlaceOrderContainer = props => {
   const dispatch = useDispatch();
 
   // Create An Order
-  const placeOrderHandler = () => {};
+  const placeOrderHandler = () => {
+    dispatch(createOrder({ user_id, cartItems, shipping, payment, itemsPrice, shippingPrice, taxPrice, totalPrice }));
+  };
 
   useEffect(() => {
+    if (success) {
+      props.history.push(`/orders/${order.id}`);
+      orderCreate.success = false;
+    }
     return () => {
       //
     };
-  }, []);
+  }, [success]);
 
   const checkoutHandler = () => {
     props.history.push('/signin?redirect=shipping');
@@ -43,7 +56,7 @@ const PlaceOrderContainer = props => {
           <div>
             <h3>Shipping</h3>
             <div>
-              {cart.shipping.address}, {cart.shipping.city},{cart.shipping.postalCode}, {cart.shipping.country},
+              {cart.shipping.address}, {cart.shipping.city},{cart.shipping.postalCode}, {cart.shipping.country}
             </div>
           </div>
           <div>

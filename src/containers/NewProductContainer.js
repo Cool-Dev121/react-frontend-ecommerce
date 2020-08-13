@@ -17,7 +17,6 @@ const NewProductContainer = props => {
   const { products } = productList;
   const productSave = useSelector(state => state.productSave);
   const productDelete = useSelector(state => state.productDelete);
-  // const {} = productSave;
   const dispatch = useDispatch();
 
   useEffect(() => {

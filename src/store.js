@@ -9,6 +9,7 @@ import {
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userSigninReducer, userRegisterReducer } from './reducers/userReducers';
+import { orderCreateReducer, orderDetailsReducer } from './reducers/orderReducers';
 
 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 const userInfo = JSON.parse(localStorage.getItem('userInfo')) || '';
@@ -24,6 +25,8 @@ const store = createStore(
     cart: cartReducer,
     userSignin: userSigninReducer,
     userRegister: userRegisterReducer,
+    orderCreate: orderCreateReducer,
+    orderDetails: orderDetailsReducer,
   }),
   initalState,
   composeWithDevTools(applyMiddleware(thunk))
