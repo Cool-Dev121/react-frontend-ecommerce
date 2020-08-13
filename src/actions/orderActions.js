@@ -19,5 +19,20 @@ export const fetchOrder = orderId => dispatch => {
 export const listMyOrders = () => dispatch => {
   fetch(`/orders`)
     .then(res => res.json())
-    .then(order => dispatch({ type: 'FETCH_MY_ORDERS', payload: order, success: true }));
+    .then(orders => dispatch({ type: 'FETCH_MY_ORDERS', payload: orders, success: true }));
+};
+
+export const fetchOrders = () => dispatch => {
+  fetch(`/orders`)
+    .then(res => res.json())
+    .then(orders => dispatch({ type: 'FETCH_ORDERS', payload: orders, success: true }));
+};
+
+export const deleteOrder = order => dispatch => {
+  fetch(`/orders/${order.id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(order => dispatch({ type: 'DELETE_ORDER', payload: order, success: true }));
 };

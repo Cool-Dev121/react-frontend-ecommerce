@@ -9,7 +9,13 @@ import {
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { userSigninReducer, userRegisterReducer, userUpdateReducer } from './reducers/userReducers';
-import { orderCreateReducer, orderDetailsReducer, myOrderListReducer } from './reducers/orderReducers';
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderDeleteReducer,
+  myOrderListReducer,
+  orderListReducer,
+} from './reducers/orderReducers';
 
 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 const userInfo = JSON.parse(localStorage.getItem('userInfo')) || '';
@@ -28,7 +34,9 @@ const store = createStore(
     userUpdate: userUpdateReducer,
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
+    orderDelete: orderDeleteReducer,
     myOrderList: myOrderListReducer,
+    orderList: orderListReducer,
   }),
   initalState,
   composeWithDevTools(applyMiddleware(thunk))

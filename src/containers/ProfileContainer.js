@@ -29,6 +29,7 @@ const ProfileContainer = props => {
 
   const myOrderList = useSelector(state => state.myOrderList);
   const { success: successOrders, orders } = myOrderList;
+  const myOrders = orders.filter(order => order.user.id === userInfo.user.id);
 
   useEffect(() => {
     if (userInfo) {
@@ -36,7 +37,7 @@ const ProfileContainer = props => {
       setFirstName(userInfo.user.first_name);
       setLastName(userInfo.user.last_name);
     }
-    dispatch(listMyOrders());
+    dispatch(listMyOrders(userInfo.user));
 
     // }
     return () => {};
@@ -132,7 +133,10 @@ const ProfileContainer = props => {
               </tr>
             </thead>
             <tbody>
-              {orders.map(order => (
+              {myOrders.map(order => (
+                // User Id: userInfo.user.id
+                // Order Id: order.id
+
                 <tr key={order.id}>
                   <td>{order.id}</td>
                   <td>{order.created_at}</td>

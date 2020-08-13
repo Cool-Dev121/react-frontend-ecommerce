@@ -435,3 +435,25 @@ tbody > tr:nth-child(odd) {
 .profile-orders {
   flex: 3 1 60rem;
 }
+
+/* Admin Dropdown */
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  display: none;
+  right: 0;
+  padding: 1rem;
+  margin: 0;
+  margin-top: 0.4rem;
+  list-style-type: none;
+  z-index: 1;
+  background-color: #203040;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

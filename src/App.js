@@ -12,6 +12,7 @@ import PaymentContainer from './containers/PaymentContainer';
 import PlaceOrderContainer from './containers/PlaceOrderContainer';
 import OrderContainer from './containers/OrderContainer';
 import ProfileContainer from './containers/ProfileContainer';
+import OrdersContainer from './containers/OrdersContainer';
 
 function App() {
   const userSignin = useSelector(state => state.userSignin);
@@ -36,6 +37,17 @@ function App() {
           <div className='header-links'>
             <Link to='/cart'>Cart</Link>
             {user ? <Link to='/profile'>{user.first_name}</Link> : <Link to='/signin'>Sign In</Link>}
+            {user && user.isAdmin && (
+              <div className='dropdown'>
+                <a href='#'>Admin</a>
+                <ul className='dropdown-content'>
+                  <li>
+                    <Link to='/orders'>Orders</Link>
+                    <Link to='/products'>Products</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </header>
 
@@ -63,6 +75,7 @@ function App() {
             <Route path='/shipping' component={ShippingContainer} />
             <Route path='/payment' component={PaymentContainer} />
             <Route path='/placeorder' component={PlaceOrderContainer} />
+            <Route path='/orders' exact component={OrdersContainer} />
             <Route path='/orders/:id' component={OrderContainer} />
             <Route path='/products/:id' exact component={ProductContainer} />
             <Route path='/cart/:id?' component={CartContainer} />
