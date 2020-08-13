@@ -21,3 +21,29 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
       return state;
   }
 };
+
+export const productSaveReducer = (state = { product: {}, success: false }, action) => {
+  switch (action.type) {
+    case 'SAVE_PRODUCT':
+      return {
+        success: true,
+        product: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const productDeleteReducer = (state = { product: {}, success: false }, action) => {
+  switch (action.type) {
+    case 'DELETE_PRODUCT':
+      return {
+        success: true,
+        product: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};

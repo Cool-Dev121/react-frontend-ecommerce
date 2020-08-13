@@ -52,6 +52,7 @@ button {
 .header-links a {
   color: #ffffff;
   text-decoration: none;
+  padding: 1rem;
 }
 
 .header-links a:hover {
@@ -327,4 +328,27 @@ input {
   padding: 1rem;
   border: 0.1rem #c0c0c0 solid;
   border-radius: 0.5rem;
+}
+
+/* Products */
+.product-header {
+  justify-content: space-between;
+  display: flex;
+  align-items: flex-start;
+}
+
+.content-margined {
+  margin: 1rem;
+}
+
+.table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+tbody > tr:nth-child(odd) {
+  background-color: #f0f0f0;
 }

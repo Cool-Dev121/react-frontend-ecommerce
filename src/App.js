@@ -6,6 +6,7 @@ import CartContainer from './containers/CartContainer';
 import SigninContainer from './containers/SigninContainer';
 import { useSelector } from 'react-redux';
 import RegisterContainer from './containers/RegisterContainer';
+import NewProductContainer from './containers/NewProductContainer';
 
 function App() {
   const userSignin = useSelector(state => state.userSignin);
@@ -28,7 +29,7 @@ function App() {
             <Link to='/'>amazona</Link>
           </div>
           <div className='header-links'>
-            <a href='cart.html'>Cart</a>
+            <Link to='/cart'>Cart</Link>
             {user ? <Link to='/profile'>{user.first_name}</Link> : <Link to='/signin'>Sign In</Link>}
           </div>
         </header>
@@ -52,7 +53,8 @@ function App() {
           <div className='content'>
             <Route path='/register' component={RegisterContainer} />
             <Route path='/signin' component={SigninContainer} />
-            <Route path='/products/:id' component={ProductContainer} />
+            <Route path='/products' exact component={NewProductContainer} />
+            <Route path='/products/:id' exact component={ProductContainer} />
             <Route path='/cart/:id?' component={CartContainer} />
             <Route path='/' exact component={HomeContainer} />
           </div>
