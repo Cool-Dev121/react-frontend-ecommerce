@@ -13,7 +13,7 @@ import { userSigninReducer, userRegisterReducer } from './reducers/userReducers'
 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 const userInfo = JSON.parse(localStorage.getItem('userInfo')) || '';
 
-const initalState = { cart: { cartItems }, userSignin: { userInfo } };
+const initalState = { cart: { cartItems, shipping: {}, payment: {} }, userSignin: { userInfo } };
 
 const store = createStore(
   combineReducers({

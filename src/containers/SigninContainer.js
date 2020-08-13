@@ -9,10 +9,11 @@ const SigninContainer = props => {
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
+  const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
   useEffect(() => {
     if (userInfo) {
-      props.history.push('/');
+      props.history.push(redirect);
     }
     return () => {
       //
@@ -46,7 +47,9 @@ const SigninContainer = props => {
           </li>
           <li>New to amazona?</li>
           <li>
-            <Link to='/register' className='button secondary text-center'>
+            <Link
+              to={redirect === '/' ? 'register' : 'register?redirect=' + redirect}
+              className='button secondary text-center'>
               Create Account
             </Link>
           </li>
