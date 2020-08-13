@@ -3,8 +3,14 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import HomeContainer from './containers/HomeContainer';
 import ProductContainer from './containers/ProductContainer';
 import CartContainer from './containers/CartContainer';
+import SigninContainer from './containers/SigninContainer';
+import { useSelector } from 'react-redux';
+import RegisterContainer from './containers/RegisterContainer';
 
 function App() {
+  const userSignin = useSelector(state => state.userSignin);
+  const { user } = userSignin.userInfo;
+
   const openMenu = () => {
     document.querySelector('.sidebar').classList.add('open');
   };
@@ -23,7 +29,7 @@ function App() {
           </div>
           <div className='header-links'>
             <a href='cart.html'>Cart</a>
-            <a href='signin'>Sign In</a>
+            {user ? <Link to='/profile'>{user.first_name}</Link> : <Link to='/signin'>Sign In</Link>}
           </div>
         </header>
 
@@ -44,6 +50,8 @@ function App() {
 
         <main className='main'>
           <div className='content'>
+            <Route path='/register' component={RegisterContainer} />
+            <Route path='/signin' component={SigninContainer} />
             <Route path='/products/:id' component={ProductContainer} />
             <Route path='/cart/:id?' component={CartContainer} />
             <Route path='/' exact component={HomeContainer} />
