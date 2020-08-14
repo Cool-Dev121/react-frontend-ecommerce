@@ -113,53 +113,58 @@ const ProductContainer = props => {
           <div className='content-margined'>
             <hr />
             <h2>Reviews</h2>
-            {!product.reviews.length && <div>There are no reviews</div>}
-            <ul className='review' id='reviews'>
-              {product.reviews.map(review => (
-                <li key={review.id}>
-                  <div>
-                    {review.name} - {review.created_at.substring(0, 10)}
-                  </div>
+            {!product.reviews ? (
+              <div>There are no reviews</div>
+            ) : (
+              <div>
+                <ul className='review' id='reviews'>
+                  {product.reviews.map(review => (
+                    <li key={review.id}>
+                      <div>
+                        {review.name} - {review.created_at.substring(0, 10)}
+                      </div>
 
-                  <div>
-                    <Rating value={review.rating} />
-                  </div>
-                  <div>{review.comment}</div>
-                </li>
-              ))}
-              <li>
-                <h3>Add A Review</h3>
-                {userInfo ? (
-                  <form onSubmit={submitHandler}>
-                    <ul className='form-container'>
-                      <li>
-                        <label htmlFor='rating'>Rating</label>
-                        <select name='rating' id='rating' value={rating} onChange={e => setRating(e.target.value)}>
-                          <option value='1'>1 - Poor</option>
-                          <option value='2'>2 - Fair</option>
-                          <option value='3'>3 - Good</option>
-                          <option value='4'>4 - Very Good</option>
-                          <option value='5'>5 - Excellent</option>
-                        </select>
-                      </li>
-                      <li>
-                        <label htmlFor='comment'>Comment</label>
-                        <textarea name='comment' value={comment} onChange={e => setComment(e.target.value)} />
-                      </li>
-                      <li>
-                        <button type='submit' className='button primary'>
-                          Submit Comment
-                        </button>
-                      </li>
-                    </ul>
-                  </form>
-                ) : (
-                  <div>
-                    Please <Link to='/signin'>Sign In</Link> to write a review.
-                  </div>
-                )}
-              </li>
-            </ul>
+                      <div>
+                        <Rating value={review.rating} />
+                      </div>
+                      <div>{review.comment}</div>
+                    </li>
+                  ))}
+                  <li>
+                    <h3>Add A Review</h3>
+                    {userInfo ? (
+                      <form onSubmit={submitHandler}>
+                        <ul className='form-container'>
+                          <li>
+                            <label htmlFor='rating'>Rating</label>
+                            <select name='rating' id='rating' value={rating} onChange={e => setRating(e.target.value)}>
+                              <option value='1'>1 - Poor</option>
+                              <option value='2'>2 - Fair</option>
+                              <option value='3'>3 - Good</option>
+                              <option value='4'>4 - Very Good</option>
+                              <option value='5'>5 - Excellent</option>
+                            </select>
+                          </li>
+                          <li>
+                            <label htmlFor='comment'>Comment</label>
+                            <textarea name='comment' value={comment} onChange={e => setComment(e.target.value)} />
+                          </li>
+                          <li>
+                            <button type='submit' className='button primary'>
+                              Submit Comment
+                            </button>
+                          </li>
+                        </ul>
+                      </form>
+                    ) : (
+                      <div>
+                        Please <Link to='/signin'>Sign In</Link> to write a review.
+                      </div>
+                    )}
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </>
       )}

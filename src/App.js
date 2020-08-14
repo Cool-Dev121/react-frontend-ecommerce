@@ -45,7 +45,7 @@ function App() {
         <header className='header'>
           <div className='brand'>
             <button onClick={openMenu}>&#9776;</button>
-            <Link to='/'>amazona</Link>
+            <Link to='/'>Widget Store</Link>
           </div>
           <div className='header-links'>
             <Link to='/cart'>Cart</Link>
@@ -77,12 +77,22 @@ function App() {
             </li>
             <li>
               <button type='button' onClick={e => categoryHandler(e.target.innerText)}>
-                Pants
+                DeWalt
               </button>
             </li>
             <li>
               <button type='button' onClick={e => categoryHandler(e.target.innerText)}>
-                Shirts
+                Craftsman
+              </button>
+            </li>
+            <li>
+              <button type='button' onClick={e => categoryHandler(e.target.innerText)}>
+                Stanley
+              </button>
+            </li>
+            <li>
+              <button type='button' onClick={e => categoryHandler(e.target.innerText)}>
+                Unknown
               </button>
             </li>
           </ul>

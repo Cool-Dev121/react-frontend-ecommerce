@@ -16,6 +16,7 @@ import {
   orderDeleteReducer,
   myOrderListReducer,
   orderListReducer,
+  payOrderReducer,
 } from './reducers/orderReducers';
 
 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -35,6 +36,7 @@ const store = createStore(
     userRegister: userRegisterReducer,
     userUpdate: userUpdateReducer,
     orderCreate: orderCreateReducer,
+    payOrder: payOrderReducer,
     orderDetails: orderDetailsReducer,
     orderDelete: orderDeleteReducer,
     myOrderList: myOrderListReducer,

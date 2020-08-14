@@ -2,12 +2,14 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchOrder } from '../../actions/orderActions';
+import { payOrder, fetchOrder } from '../../actions/orderActions';
 import formatCurrency from '../../util';
 
 const OrderContainer = props => {
   const orderDetails = useSelector(state => state.orderDetails);
+  const orderPayDetails = useSelector(state => state.payOrder);
   const { success, order } = orderDetails;
+  const { paySucess } = orderPayDetails;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,9 +17,13 @@ const OrderContainer = props => {
     return () => {
       //
     };
-  }, [dispatch, props.match.params.id]);
+  }, [dispatch, paySucess, success, props.match.params.id]);
 
-  const payHandler = () => {};
+  const payHandler = () => {
+    order.isPaid = true;
+    order.paidAt = new Date();
+    dispatch(payOrder(order));
+  };
 
   return !success ? (
     <div>Loading...</div>
@@ -77,9 +83,15 @@ const OrderContainer = props => {
         <div className='placeorder-action'>
           <ul>
             <li>
-              <button className='button primary full-width' onClick={payHandler}>
-                Pay Now
-              </button>
+              {order.isPaid ? (
+                <button disabled className='button primary full-width'>
+                  Paid
+                </button>
+              ) : (
+                <button className='button primary full-width' onClick={payHandler}>
+                  Pay Now
+                </button>
+              )}
             </li>
             <li>
               <h3>Order Summary</h3>

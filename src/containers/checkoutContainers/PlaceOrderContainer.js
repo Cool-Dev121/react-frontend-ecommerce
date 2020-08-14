@@ -42,7 +42,7 @@ const PlaceOrderContainer = props => {
     return () => {
       //
     };
-  }, [success, order.id, orderCreate.success, props.history]);
+  }, [success, orderCreate.success, props.history]);
 
   return (
     <div>

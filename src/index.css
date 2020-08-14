@@ -91,9 +91,9 @@ a:hover {
 .products li {
   list-style-type: none;
   padding: 0;
-  flex: 0 1 34rem;
+  flex: 0 1 10rem;
   margin: 1rem;
-  height: 50rem;
+  height: 34rem;
   border-bottom: 0.1rem #c0c0c0 solid;
 }
 
@@ -120,8 +120,8 @@ a:hover {
 }
 
 .product-image {
-  max-width: 34rem;
-  max-height: 34rem;
+  width: 20rem;
+  height: 20rem;
 }
 
 .product-rating {

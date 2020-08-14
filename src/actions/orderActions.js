@@ -28,6 +28,18 @@ export const fetchOrders = () => dispatch => {
     .then(orders => dispatch({ type: 'FETCH_ORDERS', payload: orders, success: true }));
 };
 
+export const payOrder = order => dispatch => {
+  fetch(`/orders/${order.id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ order }),
+  })
+    .then(res => res.json())
+    .then(order => dispatch({ type: 'PAY_ORDER', payload: order, success: true }));
+};
+
 export const deleteOrder = order => dispatch => {
   fetch(`/orders/${order.id}`, {
     method: 'DELETE',

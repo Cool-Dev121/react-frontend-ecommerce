@@ -45,7 +45,7 @@ const SigninContainer = props => {
               Sign In
             </button>
           </li>
-          <li>New to amazona?</li>
+          <li>New to Widget Store?</li>
           <li>
             <Link
               to={redirect === '/' ? 'register' : 'register?redirect=' + redirect}

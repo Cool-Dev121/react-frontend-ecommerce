@@ -1,9 +1,7 @@
 import React from 'react';
 
 const Rating = props => {
-  return !props.value ? (
-    <div></div>
-  ) : (
+  return (
     <div className='rating'>
       <span>
         <i className={props.value >= 1 ? 'fa fa-star' : props.value >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'} />
