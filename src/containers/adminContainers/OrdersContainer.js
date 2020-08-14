@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchOrders, deleteOrder } from '../../actions/orderActions';
+import { fetchOrders, deliverOrder, deleteOrder } from '../../actions/orderActions';
 import formatCurrency from '../../util';
 
 const OrdersContainer = props => {
@@ -9,15 +9,25 @@ const OrdersContainer = props => {
   const { orders } = orderList;
 
   const orderDelete = useSelector(state => state.orderDelete);
+  const orderDeliver = useSelector(state => state.deliverOrder);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (orderDelete.success) {
+      orderDelete.success = false;
+    }
     dispatch(fetchOrders());
 
     return () => {
       //
     };
-  }, [dispatch, orderDelete.success]);
+  }, [dispatch, orderDeliver.success, orderDelete.success]);
+
+  const deliverHandler = order => {
+    order.isDelivered = true;
+    order.deliveredAt = new Date().toString();
+    dispatch(deliverOrder(order));
+  };
 
   const deleteHandler = order => {
     dispatch(deleteOrder(order));
@@ -47,7 +57,7 @@ const OrdersContainer = props => {
             {orders.map(order => (
               <tr key={order.id}>
                 <td>{order.id}</td>
-                <td>{order.created_at}</td>
+                <td>{order.created_at.substring(0, 10)}</td>
                 <td>{formatCurrency(order.totalPrice)}</td>
                 <td>{order.user.first_name}</td>
                 <td>{order.isPaid.toString()}</td>
@@ -58,6 +68,16 @@ const OrdersContainer = props => {
                   <Link to={`/orders/${order.id}`} className='button secondary'>
                     Details
                   </Link>
+                  {!order.isDelivered ? (
+                    <button className='button secondary' onClick={() => deliverHandler(order)}>
+                      Deliver Order
+                    </button>
+                  ) : (
+                    <button disabled className='button secondary'>
+                      Deliver Order
+                    </button>
+                  )}
+
                   <button className='button secondary' onClick={() => deleteHandler(order)}>
                     Delete
                   </button>

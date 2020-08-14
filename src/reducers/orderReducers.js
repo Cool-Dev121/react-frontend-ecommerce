@@ -46,7 +46,28 @@ export const payOrderReducer = (
 ) => {
   switch (action.type) {
     case 'PAY_ORDER':
-      console.log(action.payload);
+      return {
+        order: action.payload,
+        success: true,
+      };
+    default:
+      return state;
+  }
+};
+
+export const deliverOrderReducer = (
+  state = {
+    order: {
+      orderItems: [],
+      shipping: {},
+      payment: {},
+    },
+    success: false,
+  },
+  action
+) => {
+  switch (action.type) {
+    case 'DELIVER_ORDER':
       return {
         order: action.payload,
         success: true,

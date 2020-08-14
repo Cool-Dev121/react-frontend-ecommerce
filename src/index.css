@@ -256,6 +256,10 @@ a > .rating > span:last-child {
   cursor: pointer;
 }
 
+.button[disabled] {
+  cursor: auto;
+}
+
 .button:hover {
   border: 0.1rem #404040 solid;
 }
@@ -532,4 +536,13 @@ tbody > tr:nth-child(odd) {
 
 .categories button:hover {
   background-color: #c0c0c0;
+}
+
+/* Admin Orders Page */
+.order-list tbody td a {
+  margin: 0 1rem;
+}
+
+.order-list tbody td button {
+  margin: 0 1rem;
 }

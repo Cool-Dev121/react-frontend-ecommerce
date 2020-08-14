@@ -38,6 +38,7 @@ const PlaceOrderContainer = props => {
     if (success) {
       props.history.push(`/orders/${order.id}`);
       orderCreate.success = false;
+      cart.cartItems = [];
     }
     return () => {
       //

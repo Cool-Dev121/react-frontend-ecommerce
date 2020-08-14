@@ -136,7 +136,7 @@ const ProfileContainer = props => {
               {myOrders.map(order => (
                 <tr key={order.id}>
                   <td>{order.id}</td>
-                  <td>{order.created_at}</td>
+                  <td>{order.created_at.substring(0, 10)}</td>
                   <td>{formatCurrency(order.totalPrice)}</td>
                   <td>{order.isPaid.toString()}</td>
                   <td>
