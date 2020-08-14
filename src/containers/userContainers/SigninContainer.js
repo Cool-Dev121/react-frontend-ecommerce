@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { signin } from '../actions/userActions';
+import { signin } from '../../actions/userActions';
 
 const SigninContainer = props => {
   const [email, setEmail] = useState('');
@@ -18,7 +18,7 @@ const SigninContainer = props => {
     return () => {
       //
     };
-  }, [userInfo]);
+  }, [userInfo, props.history, redirect]);
 
   const submitHandler = event => {
     event.preventDefault();

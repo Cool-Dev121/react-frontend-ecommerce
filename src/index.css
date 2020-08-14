@@ -412,6 +412,10 @@ tbody > tr:nth-child(odd) {
   justify-content: space-between;
 }
 
+.placeorder h2 {
+  text-align: center;
+}
+
 .placeorder-info {
   flex: 3 1 60rem;
 }
@@ -498,6 +502,10 @@ tbody > tr:nth-child(odd) {
   max-width: 45rem;
   justify-content: space-between;
   align-items: center;
+}
+
+.filter-header {
+  text-align: center;
 }
 
 .filter input,

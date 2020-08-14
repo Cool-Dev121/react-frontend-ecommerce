@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../actions/productActions';
@@ -7,15 +7,12 @@ import Rating from '../components/Rating';
 
 const HomeContainer = props => {
   const productList = useSelector(state => state.productList);
-  const { products, filteredProducts } = productList;
+  const { filteredProducts } = productList;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchProducts());
-    return () => {
-      //
-    };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className='content'>

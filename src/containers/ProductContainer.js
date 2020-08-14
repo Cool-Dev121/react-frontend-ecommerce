@@ -26,7 +26,7 @@ const ProductContainer = props => {
     return () => {
       //
     };
-  }, [productSaveSuccess]);
+  }, [dispatch, productReviewSave.success, productSaveSuccess, props.match.params.id]);
 
   const submitHandler = e => {
     e.preventDefault();

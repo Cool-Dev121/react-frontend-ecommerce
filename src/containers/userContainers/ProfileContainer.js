@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { logout, update } from '../actions/userActions';
+import { logout, update } from '../../actions/userActions';
 import { useSelector, useDispatch } from 'react-redux';
-import { listMyOrders } from '../actions/orderActions';
+import { listMyOrders } from '../../actions/orderActions';
 import { Link } from 'react-router-dom';
+import formatCurrency from '../../util';
 
 const ProfileContainer = props => {
   const [firstName, setFirstName] = useState('');
@@ -10,7 +11,6 @@ const ProfileContainer = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConformation] = useState('');
-  const userUpdate = useSelector(state => state.userUpdate);
 
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
@@ -41,7 +41,7 @@ const ProfileContainer = props => {
 
     // }
     return () => {};
-  }, []);
+  }, [dispatch, userInfo]);
 
   return (
     <div className='profile'>
@@ -134,14 +134,11 @@ const ProfileContainer = props => {
             </thead>
             <tbody>
               {myOrders.map(order => (
-                // User Id: userInfo.user.id
-                // Order Id: order.id
-
                 <tr key={order.id}>
                   <td>{order.id}</td>
                   <td>{order.created_at}</td>
-                  <td>${order.totalPrice}</td>
-                  <td>{order.isPaid}</td>
+                  <td>{formatCurrency(order.totalPrice)}</td>
+                  <td>{order.isPaid.toString()}</td>
                   <td>
                     <Link to={`/orders/${order.id}`}>Details</Link>
                   </td>

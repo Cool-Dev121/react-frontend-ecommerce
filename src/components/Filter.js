@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect, useSelector } from 'react-redux';
 import { filterProducts, sortProducts } from '../actions/productActions';
 
 const Filter = props => {
-  const [category, setCategory] = useState('');
-  const [searchKeyword, setSearchKeyword] = useState('');
+  // const [category, setCategory] = useState('');
   const productList = useSelector(state => state.productList);
-  const { products, filteredProducts } = productList;
+  const { category, products, filteredProducts } = productList;
 
   const submitHandler = e => {
     e.preventDefault();
@@ -14,8 +13,6 @@ const Filter = props => {
 
   return (
     <div>
-      {category && <h2>{category}</h2>}
-
       <ul className='filter'>
         <li>
           <form onSubmit={submitHandler}>
@@ -32,6 +29,14 @@ const Filter = props => {
           </select>
         </li>
       </ul>
+      {category && category !== 'All' ? (
+        <div className='filter-header'>
+          <h2>{category}</h2>
+          <hr />
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };

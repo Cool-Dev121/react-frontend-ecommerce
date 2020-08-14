@@ -1,25 +1,29 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { filterProductsByCategory } from './actions/productActions';
+// Main Containers
 import HomeContainer from './containers/HomeContainer';
 import ProductContainer from './containers/ProductContainer';
-import CartContainer from './containers/CartContainer';
-import SigninContainer from './containers/SigninContainer';
-import { connect, useSelector, useDispatch } from 'react-redux';
-import RegisterContainer from './containers/RegisterContainer';
-import ProductsContainer from './containers/ProductsContainer';
-import ShippingContainer from './containers/ShippingContainer';
-import PaymentContainer from './containers/PaymentContainer';
-import PlaceOrderContainer from './containers/PlaceOrderContainer';
-import OrderContainer from './containers/OrderContainer';
-import ProfileContainer from './containers/ProfileContainer';
-import OrdersContainer from './containers/OrdersContainer';
-import { filterProductsByCategory } from './actions/productActions';
+// Cart & Checkout Containers
+import CartContainer from './containers/checkoutContainers/CartContainer';
+import ShippingContainer from './containers/checkoutContainers/ShippingContainer';
+import PaymentContainer from './containers/checkoutContainers/PaymentContainer';
+import PlaceOrderContainer from './containers/checkoutContainers/PlaceOrderContainer';
+import OrderContainer from './containers/checkoutContainers/OrderContainer';
+// User Containers
+import SigninContainer from './containers/userContainers/SigninContainer';
+import RegisterContainer from './containers/userContainers/RegisterContainer';
+import ProfileContainer from './containers/userContainers/ProfileContainer';
+// Admin Containers
+import ProductsContainer from './containers/adminContainers/ProductsContainer';
+import OrdersContainer from './containers/adminContainers/OrdersContainer';
 
 function App() {
   const userSignin = useSelector(state => state.userSignin);
   const { user } = userSignin.userInfo;
   const productList = useSelector(state => state.productList);
-  const { products, filteredProducts } = productList;
+  const { products } = productList;
   const dispatch = useDispatch();
 
   const openMenu = () => {
@@ -48,7 +52,7 @@ function App() {
             {user ? <Link to='/profile'>{user.first_name}</Link> : <Link to='/signin'>Sign In</Link>}
             {user && user.isAdmin && (
               <div className='dropdown'>
-                <a href='#'>Admin</a>
+                <Link to='/orders'>Admin</Link>
                 <ul className='dropdown-content'>
                   <li>
                     <Link to='/orders'>Orders</Link>

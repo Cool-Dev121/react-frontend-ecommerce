@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { saveShipping } from '../actions/cartActions';
-import CheckoutSteps from '../components/CheckoutSteps';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { saveShipping } from '../../actions/cartActions';
+import CheckoutSteps from '../../components/CheckoutSteps';
 
 const ShippingContainer = props => {
   const [address, setAddress] = useState('');
@@ -29,19 +28,25 @@ const ShippingContainer = props => {
             </li>
             <li>
               <label htmlFor='address'>Address</label>
-              <input type='text' name='address' id='address' onChange={e => setAddress(e.target.value)} />
+              <input type='text' required name='address' id='address' onChange={e => setAddress(e.target.value)} />
             </li>
             <li>
               <label htmlFor='city'>City</label>
-              <input type='text' name='city' id='city' onChange={e => setCity(e.target.value)} />
+              <input type='text' required name='city' id='city' onChange={e => setCity(e.target.value)} />
             </li>
             <li>
               <label htmlFor='postalCode'>Postal Code</label>
-              <input type='text' name='postalCode' id='postalCode' onChange={e => setPostalCode(e.target.value)} />
+              <input
+                type='text'
+                required
+                name='postalCode'
+                id='postalCode'
+                onChange={e => setPostalCode(e.target.value)}
+              />
             </li>
             <li>
               <label htmlFor='country'>Country</label>
-              <input type='text' name='country' id='country' onChange={e => setCountry(e.target.value)} />
+              <input type='text' required name='country' id='country' onChange={e => setCountry(e.target.value)} />
             </li>
 
             <li>

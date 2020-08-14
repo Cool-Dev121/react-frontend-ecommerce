@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { savePayment } from '../actions/cartActions';
-import CheckoutSteps from '../components/CheckoutSteps';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { savePayment } from '../../actions/cartActions';
+import CheckoutSteps from '../../components/CheckoutSteps';
 
 const PaymentContainer = props => {
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -30,10 +29,10 @@ const PaymentContainer = props => {
                   type='radio'
                   name='paymentMethod'
                   id='paymentMethod'
-                  value='paypal'
+                  value='PayPal'
                   onChange={e => setPaymentMethod(e.target.value)}
                 />
-                <label htmlFor='paymentMethod'>Paypal</label>
+                <label htmlFor='paymentMethod'>PayPal</label>
               </div>
             </li>
             <li>

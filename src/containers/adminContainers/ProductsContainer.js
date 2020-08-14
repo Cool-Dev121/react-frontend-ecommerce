@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchProducts, saveProduct, deleteProduct } from '../actions/productActions';
+import { fetchProducts, saveProduct, deleteProduct } from '../../actions/productActions';
+import formatCurrency from '../../util';
 
 const ProductsContainer = props => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -30,7 +30,7 @@ const ProductsContainer = props => {
     return () => {
       //
     };
-  }, [productSave.success, productDelete.success]);
+  }, [dispatch, productSave.success, productDelete.success]);
 
   const openModal = product => {
     setModalVisible(true);
@@ -71,16 +71,31 @@ const ProductsContainer = props => {
               </li>
               <li>
                 <label htmlFor='name'>Name</label>
-                <input type='text' name='name' id='name' value={name} onChange={e => setName(e.target.value)} />
+                <input
+                  type='text'
+                  required
+                  name='name'
+                  id='name'
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                />
               </li>
               <li>
                 <label htmlFor='price'>Price</label>
-                <input type='text' name='price' id='price' value={price} onChange={e => setPrice(e.target.value)} />
+                <input
+                  type='text'
+                  required
+                  name='price'
+                  id='price'
+                  value={price}
+                  onChange={e => setPrice(e.target.value)}
+                />
               </li>
               <li>
                 <label htmlFor='name'>Description</label>
                 <textarea
                   name='description'
+                  required
                   id='description'
                   value={description}
                   onChange={e => setDescription(e.target.value)}
@@ -88,16 +103,31 @@ const ProductsContainer = props => {
               </li>
               <li>
                 <label htmlFor='image'>Image</label>
-                <input type='text' name='image' id='image' value={image} onChange={e => setImage(e.target.value)} />
+                <input
+                  type='text'
+                  required
+                  name='image'
+                  id='image'
+                  value={image}
+                  onChange={e => setImage(e.target.value)}
+                />
               </li>
               <li>
                 <label htmlFor='brand'>Brand</label>
-                <input type='text' name='brand' id='brand' value={brand} onChange={e => setBrand(e.target.value)} />
+                <input
+                  type='text'
+                  required
+                  name='brand'
+                  id='brand'
+                  value={brand}
+                  onChange={e => setBrand(e.target.value)}
+                />
               </li>
               <li>
                 <label htmlFor='category'>Category</label>
                 <input
                   type='text'
+                  required
                   name='category'
                   id='category'
                   value={category}
@@ -108,6 +138,7 @@ const ProductsContainer = props => {
                 <label htmlFor='countInStock'>Count In Stock</label>
                 <input
                   type='text'
+                  required
                   name='countInStock'
                   id='countInStock'
                   value={countInStock}
@@ -144,7 +175,7 @@ const ProductsContainer = props => {
                   <tr key={product.id}>
                     <td>{product.id}</td>
                     <td>{product.name}</td>
-                    <td>{product.price}</td>
+                    <td>{formatCurrency(product.price)}</td>
                     <td>{product.category}</td>
                     <td>{product.brand}</td>
                     <td>

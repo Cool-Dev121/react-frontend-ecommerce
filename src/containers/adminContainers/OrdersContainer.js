@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchOrders, deleteOrder } from '../actions/orderActions';
+import { fetchOrders, deleteOrder } from '../../actions/orderActions';
+import formatCurrency from '../../util';
 
 const OrdersContainer = props => {
   const orderList = useSelector(state => state.orderList);
@@ -16,7 +17,7 @@ const OrdersContainer = props => {
     return () => {
       //
     };
-  }, [orderDelete.success]);
+  }, [dispatch, orderDelete.success]);
 
   const deleteHandler = order => {
     dispatch(deleteOrder(order));
@@ -47,7 +48,7 @@ const OrdersContainer = props => {
               <tr key={order.id}>
                 <td>{order.id}</td>
                 <td>{order.created_at}</td>
-                <td>${order.totalPrice}</td>
+                <td>{formatCurrency(order.totalPrice)}</td>
                 <td>{order.user.first_name}</td>
                 <td>{order.isPaid.toString()}</td>
                 <td>{order.paidAt}</td>

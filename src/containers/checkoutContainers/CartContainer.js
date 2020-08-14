@@ -1,8 +1,9 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../../actions/cartActions';
 import { Link } from 'react-router-dom';
+import formatCurrency from '../../util';
 
 const CartContainer = props => {
   const cart = useSelector(state => state.cart);
@@ -16,7 +17,7 @@ const CartContainer = props => {
     if (productId) {
       dispatch(addToCart(productId, qty));
     }
-  }, []);
+  }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = productId => {
     dispatch(removeFromCart(productId));
@@ -69,8 +70,8 @@ const CartContainer = props => {
       </div>
       <div className='cart-action'>
         <h3>
-          Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items): $
-          {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+          Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items):
+          {formatCurrency(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}
         </h3>
         <button onClick={checkoutHandler} className='button primary full-width' disabled={cartItems.length === 0}>
           Proceed To Checkout

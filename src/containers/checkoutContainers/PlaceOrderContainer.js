@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../actions/cartActions';
 import { Link } from 'react-router-dom';
-import CheckoutSteps from '../components/CheckoutSteps';
-import { createOrder } from '../actions/orderActions';
+import CheckoutSteps from '../../components/CheckoutSteps';
+import { createOrder } from '../../actions/orderActions';
+import formatCurrency from '../../util';
 
 const PlaceOrderContainer = props => {
   const cart = useSelector(state => state.cart);
@@ -42,11 +42,7 @@ const PlaceOrderContainer = props => {
     return () => {
       //
     };
-  }, [success]);
-
-  const checkoutHandler = () => {
-    props.history.push('/signin?redirect=shipping');
-  };
+  }, [success, order.id, orderCreate.success, props.history]);
 
   return (
     <div>
@@ -103,19 +99,19 @@ const PlaceOrderContainer = props => {
             </li>
             <li>
               <div>Items</div>
-              <div>${itemsPrice}</div>
+              <div>{formatCurrency(itemsPrice)}</div>
             </li>
             <li>
               <div>Shipping</div>
-              <div>${shippingPrice}</div>
+              <div>{formatCurrency(shippingPrice)}</div>
             </li>
             <li>
               <div>Tax</div>
-              <div>${taxPrice}</div>
+              <div>{formatCurrency(taxPrice)}</div>
             </li>
             <li>
               <div>Order Total</div>
-              <div>${totalPrice}</div>
+              <div>{formatCurrency(totalPrice)}</div>
             </li>
           </ul>
         </div>
