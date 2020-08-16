@@ -1,10 +1,19 @@
-export const productListReducer = (
-  state = { products: [], filteredProducts: [], filter: '', category: '', sort: 'latest' },
+export const productsReducer = (
+  state = {
+    products: [],
+    filteredProducts: [],
+    product: { reviews: [] },
+    filter: '',
+    category: '',
+    sort: 'latest',
+    success: true,
+  },
   action
 ) => {
   switch (action.type) {
     case 'FETCH_PRODUCTS':
       return {
+        ...state,
         products: action.payload,
         filteredProducts: action.payload,
       };
@@ -32,53 +41,34 @@ export const productListReducer = (
         sort: action.payload.sort,
         filteredProducts: action.payload.sortedProducts,
       };
-    default:
-      return state;
-  }
-};
 
-export const productDetailsReducer = (state = { product: { reviews: [] } }, action) => {
-  switch (action.type) {
+    // See Details of a Product
     case 'GET_PRODUCT':
       return {
+        ...state,
         product: action.payload,
       };
 
-    default:
-      return state;
-  }
-};
-
-export const productSaveReducer = (state = { product: {}, success: false }, action) => {
-  switch (action.type) {
+    // Create/Update An Individual Product
     case 'SAVE_PRODUCT':
       return {
+        ...state,
         success: true,
         product: action.payload,
       };
 
-    default:
-      return state;
-  }
-};
-
-export const productDeleteReducer = (state = { product: {}, success: false }, action) => {
-  switch (action.type) {
+    // Delete An Individual Product
     case 'DELETE_PRODUCT':
       return {
+        ...state,
         success: true,
         product: action.payload,
       };
 
-    default:
-      return state;
-  }
-};
-
-export const productReviewSaveReducer = (state = { success: false }, action) => {
-  switch (action.type) {
+    // Create a Product Review and Save It
     case 'SAVE_PRODUCT_REVIEW':
       return {
+        ...state,
         success: true,
         review: action.payload,
       };

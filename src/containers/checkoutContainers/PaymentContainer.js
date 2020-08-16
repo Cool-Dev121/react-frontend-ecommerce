@@ -4,9 +4,8 @@ import { savePayment } from '../../actions/cartActions';
 import CheckoutSteps from '../../components/CheckoutSteps';
 
 const PaymentContainer = props => {
-  const [paymentMethod, setPaymentMethod] = useState('');
-
   const dispatch = useDispatch();
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   const submitHandler = event => {
     event.preventDefault();

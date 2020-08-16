@@ -5,23 +5,20 @@ import { fetchOrders, deliverOrder, deleteOrder } from '../../actions/orderActio
 import formatCurrency from '../../util';
 
 const OrdersContainer = props => {
-  const orderList = useSelector(state => state.orderList);
+  const dispatch = useDispatch();
+  const orderList = useSelector(state => state.orders);
   const { orders } = orderList;
 
-  const orderDelete = useSelector(state => state.orderDelete);
-  const orderDeliver = useSelector(state => state.deliverOrder);
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    if (orderDelete.success) {
-      orderDelete.success = false;
+    if (orderList.success) {
+      orderList.success = false;
     }
     dispatch(fetchOrders());
 
     return () => {
       //
     };
-  }, [dispatch, orderDeliver.success, orderDelete.success]);
+  }, [dispatch, orderList.success]);
 
   const deliverHandler = order => {
     order.isDelivered = true;

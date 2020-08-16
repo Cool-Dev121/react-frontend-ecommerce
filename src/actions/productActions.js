@@ -4,6 +4,7 @@ export const fetchProducts = () => dispatch => {
     .then(products => dispatch({ type: 'FETCH_PRODUCTS', payload: products }));
 };
 
+// Filter Product By Search
 export const filterProducts = (products, filter) => dispatch => {
   const filteredProducts = products.filter(product => product.name.toUpperCase().indexOf(filter.toUpperCase()) > -1);
 
@@ -16,6 +17,7 @@ export const filterProducts = (products, filter) => dispatch => {
   });
 };
 
+// Sort Products By Latest, Lowest, Highest
 export const sortProducts = (products, sort) => dispatch => {
   const sortedProducts = products.slice();
   if (sort === 'latest') {
@@ -33,6 +35,7 @@ export const sortProducts = (products, sort) => dispatch => {
   });
 };
 
+// Filter Products By Category
 export const filterProductsByCategory = (products, category) => dispatch => {
   let filteredByCategory = products;
   if (category !== 'All') {

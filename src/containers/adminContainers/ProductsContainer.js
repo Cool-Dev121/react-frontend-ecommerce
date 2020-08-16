@@ -4,6 +4,7 @@ import { fetchProducts, saveProduct, deleteProduct } from '../../actions/product
 import formatCurrency from '../../util';
 
 const ProductsContainer = props => {
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
   const [name, setName] = useState('');
@@ -13,24 +14,20 @@ const ProductsContainer = props => {
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [countInStock, setCountInStock] = useState('');
-  const productList = useSelector(state => state.productList);
+  const productList = useSelector(state => state.products);
   const { products } = productList;
-  const productSave = useSelector(state => state.productSave);
-  const productDelete = useSelector(state => state.productDelete);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (productSave.success) {
-      productSave.success = false;
+    if (productList.success) {
+      productList.success = false;
       setModalVisible(false);
     }
-    productDelete.success = false;
     dispatch(fetchProducts());
 
     return () => {
       //
     };
-  }, [dispatch, productSave.success, productDelete.success]);
+  }, [dispatch, productList.success]);
 
   const openModal = product => {
     setModalVisible(true);

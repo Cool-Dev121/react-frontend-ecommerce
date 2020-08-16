@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom';
 import { signin } from '../../actions/userActions';
 
 const SigninContainer = props => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const userSignin = useSelector(state => state.userSignin);
-  const { userInfo } = userSignin;
-  const dispatch = useDispatch();
+  const { userInfo } = useSelector(state => state.user);
   const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
   useEffect(() => {

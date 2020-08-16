@@ -6,18 +6,18 @@ import Filter from '../components/Filter';
 import Rating from '../components/Rating';
 
 const HomeContainer = props => {
-  const productList = useSelector(state => state.productList);
-  const { filteredProducts } = productList;
   const dispatch = useDispatch();
+  const { filteredProducts } = useSelector(state => state.products);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
   return (
-    <div className='content'>
-      <Filter />
-      <div>
+    <div className='home-content'>
+      <div className='main-content'>
+        <Filter />
+        <hr />
         {!filteredProducts ? (
           <div>Loading...</div>
         ) : (

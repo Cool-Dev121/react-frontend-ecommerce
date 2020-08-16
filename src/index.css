@@ -1,12 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 html {
   font-size: 62.5%; /* Sets default font size to 10px (1rem) */
   box-sizing: border-box;
 }
 
-body {
-  font: 1.6rem Helvetica;
+body,
+#root {
   height: 100vh;
   margin: 0;
+}
+
+body,
+input,
+button,
+select,
+textarea {
+  font: 1.6rem Montserrat, Helvetica, Arial, sans-serif;
 }
 
 button {
@@ -59,8 +69,18 @@ button {
   color: #ff8000;
 }
 
-.main {
+.home-content {
+  display: flex;
+  flex-wrap: flex;
+}
+
+.main-content {
   grid-area: main;
+  flex: 3 60rem;
+}
+
+.cart-sidebar {
+  flex: 1 20rem;
 }
 
 .footer {
@@ -498,14 +518,16 @@ tbody > tr:nth-child(odd) {
 }
 
 /* Filter Products */
-.filter {
+.filter-options {
   display: flex;
-  list-style-type: none;
-  padding: 0;
-  margin: 1rem auto;
-  max-width: 45rem;
   justify-content: space-between;
+  padding: 1rem;
+  margin: 1rem;
   align-items: center;
+}
+
+.filter div {
+  flex: 1 2 1;
 }
 
 .filter-header {
@@ -519,6 +541,10 @@ tbody > tr:nth-child(odd) {
   border-radius: 0.5rem;
   border: 0.1rem #c0c0c0 solid;
   font-size: 1.6rem;
+}
+
+.filter input {
+  width: 35rem;
 }
 
 .categories {

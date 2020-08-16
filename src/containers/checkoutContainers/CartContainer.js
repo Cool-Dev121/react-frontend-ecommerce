@@ -6,12 +6,10 @@ import { Link } from 'react-router-dom';
 import formatCurrency from '../../util';
 
 const CartContainer = props => {
-  const cart = useSelector(state => state.cart);
-  const { cartItems } = cart;
-
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector(state => state.cart);
   const productId = props.match.params.id;
   const qty = props.location.search ? Number(props.location.search.split('=')[1]) : 1;
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (productId) {
@@ -39,7 +37,7 @@ const CartContainer = props => {
             <div>Cart is empty</div>
           ) : (
             cartItems.map(item => (
-              <li>
+              <li key={item.product}>
                 <div className='cart-image'>
                   <img src={item.image} alt={item.title} />
                 </div>
@@ -70,7 +68,7 @@ const CartContainer = props => {
       </div>
       <div className='cart-action'>
         <h3>
-          Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items):
+          Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items):{' '}
           {formatCurrency(cartItems.reduce((a, c) => a + c.price * c.qty, 0))}
         </h3>
         <button onClick={checkoutHandler} className='button primary full-width' disabled={cartItems.length === 0}>

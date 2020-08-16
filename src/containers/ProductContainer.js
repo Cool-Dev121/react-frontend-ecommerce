@@ -5,28 +5,25 @@ import { detailsProduct, saveProductReview } from '../actions/productActions';
 import Rating from '../components/Rating';
 
 const ProductContainer = props => {
+  const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  const userSignin = useSelector(state => state.userSignin);
-  const { userInfo } = userSignin;
-  const productDetails = useSelector(state => state.productDetails);
-  const { product } = productDetails;
-  const productReviewSave = useSelector(state => state.productReviewSave);
-  const { success: productSaveSuccess } = productReviewSave;
-  const dispatch = useDispatch();
+  const { userInfo } = useSelector(state => state.user);
+  const productDetails = useSelector(state => state.products);
+  const { product, success: productSaveSuccess } = productDetails;
 
   useEffect(() => {
     if (productSaveSuccess) {
       setRating(1);
       setComment('');
-      productReviewSave.success = false;
+      productDetails.success = false;
     }
     dispatch(detailsProduct(props.match.params.id));
     return () => {
       //
     };
-  }, [dispatch, productReviewSave.success, productSaveSuccess, props.match.params.id]);
+  }, [dispatch, productDetails.success, productSaveSuccess, props.match.params.id]);
 
   const submitHandler = e => {
     e.preventDefault();
@@ -49,7 +46,7 @@ const ProductContainer = props => {
         <Link to='/'>Back to results</Link>
       </div>
 
-      {!product ? (
+      {!product && product.id ? (
         <div>Loading...</div>
       ) : (
         <>

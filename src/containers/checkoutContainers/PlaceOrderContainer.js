@@ -7,27 +7,25 @@ import { createOrder } from '../../actions/orderActions';
 import formatCurrency from '../../util';
 
 const PlaceOrderContainer = props => {
+  const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
-  const orderCreate = useSelector(state => state.orderCreate);
-  const userSignin = useSelector(state => state.userSignin);
-  const { success, order } = orderCreate;
-  const { userInfo } = userSignin;
+  const orders = useSelector(state => state.orders);
+  const { userInfo } = useSelector(state => state.user);
+  const { cartItems, shipping, payment } = cart;
+  const { success, order } = orders;
   const user_id = userInfo.user.id;
 
-  const { cartItems, shipping, payment } = cart;
+  // Variables for cost of order
+  const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
+  const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  const taxPrice = 0.15 * itemsPrice;
+  const totalPrice = itemsPrice + shippingPrice + taxPrice;
 
   if (!shipping.address) {
     props.history.push('/shipping');
   } else if (!payment.paymentMethod) {
     props.history.push('/payment');
   }
-
-  const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
-  const shippingPrice = itemsPrice > 100 ? 0 : 10;
-  const taxPrice = 0.15 * itemsPrice;
-  const totalPrice = itemsPrice + shippingPrice + taxPrice;
-
-  const dispatch = useDispatch();
 
   // Create An Order
   const placeOrderHandler = () => {
@@ -36,14 +34,14 @@ const PlaceOrderContainer = props => {
 
   useEffect(() => {
     if (success) {
-      props.history.push(`/orders/${order.id}`);
-      orderCreate.success = false;
       cart.cartItems = [];
+      orders.success = false;
+      props.history.push(`/orders/${order.id}`);
     }
     return () => {
       //
     };
-  }, [success, orderCreate.success, props.history]);
+  }, [success, cart.cartItems, order.id, orders.success, props.history]);
 
   return (
     <div>
@@ -53,7 +51,7 @@ const PlaceOrderContainer = props => {
           <div>
             <h3>Shipping</h3>
             <div>
-              {cart.shipping.address}, {cart.shipping.city},{cart.shipping.postalCode}, {cart.shipping.country}
+              {cart.shipping.address}, {cart.shipping.city}, {cart.shipping.postalCode}, {cart.shipping.country}
             </div>
           </div>
           <div>
@@ -70,7 +68,7 @@ const PlaceOrderContainer = props => {
                 <div>Cart is empty</div>
               ) : (
                 cartItems.map(item => (
-                  <li>
+                  <li key={item.product}>
                     <div className='cart-image'>
                       <img src={item.image} alt={item.title} />
                     </div>

@@ -4,15 +4,13 @@ import { Link } from 'react-router-dom';
 import { register } from '../../actions/userActions';
 
 const RegisterContainer = props => {
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConformation] = useState('');
-
-  const userRegister = useSelector(state => state.userRegister);
-  const { userInfo } = userRegister;
-  const dispatch = useDispatch();
+  const { userInfo } = useSelector(state => state.user);
   const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
   useEffect(() => {

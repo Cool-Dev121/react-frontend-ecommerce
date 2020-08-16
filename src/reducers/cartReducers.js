@@ -5,7 +5,6 @@ export const cartReducer = (state = { cartItems: [], shipping: {}, payment: {} }
       const product = state.cartItems.find(x => x.product === item.product);
 
       if (product) {
-        console.log('found product');
         return {
           cartItems: state.cartItems.map(x => (x.product === product.product ? item : x)),
         };

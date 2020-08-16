@@ -20,10 +20,12 @@ import ProductsContainer from './containers/adminContainers/ProductsContainer';
 import OrdersContainer from './containers/adminContainers/OrdersContainer';
 
 function App() {
-  const userSignin = useSelector(state => state.userSignin);
-  const { user } = userSignin.userInfo;
-  const productList = useSelector(state => state.productList);
+  const userObject = useSelector(state => state.user);
+  const productList = useSelector(state => state.products);
+  const cart = useSelector(state => state.cart);
+  const { user } = userObject.userInfo;
   const { products } = productList;
+  const { cartItems } = cart;
   const dispatch = useDispatch();
 
   const openMenu = () => {
@@ -42,13 +44,16 @@ function App() {
   return (
     <BrowserRouter>
       <div className='grid-container'>
+        {/* Header Section */}
         <header className='header'>
           <div className='brand'>
             <button onClick={openMenu}>&#9776;</button>
             <Link to='/'>Widget Store</Link>
           </div>
           <div className='header-links'>
-            <Link to='/cart'>Cart</Link>
+            <Link to='/cart'>
+              Cart {cartItems.length > 0 ? `(Items: ${cartItems.reduce((a, c) => a + c.qty, 0)})` : 'is empty'}
+            </Link>
             {user ? <Link to='/profile'>{user.first_name}</Link> : <Link to='/signin'>Sign In</Link>}
             {user && user.isAdmin && (
               <div className='dropdown'>
@@ -64,6 +69,7 @@ function App() {
           </div>
         </header>
 
+        {/* Category Section */}
         <aside className='sidebar'>
           <h3>Shopping Categories</h3>
           <button className='sidebar-close-button' onClick={closeMenu}>
@@ -98,8 +104,9 @@ function App() {
           </ul>
         </aside>
 
-        <main className='main'>
-          <div className='content'>
+        {/* Main Content Section */}
+        <div className='content'>
+          <main className='main'>
             <Route path='/register' component={RegisterContainer} />
             <Route path='/signin' component={SigninContainer} />
             <Route path='/profile' component={ProfileContainer} />
@@ -112,8 +119,10 @@ function App() {
             <Route path='/products/:id' exact component={ProductContainer} />
             <Route path='/cart/:id?' component={CartContainer} />
             <Route path='/' exact component={HomeContainer} />
-          </div>
-        </main>
+          </main>
+        </div>
+
+        {/* Footer */}
         <footer className='footer'>Copyright &#169; 2020 Tanner Townsend. All rights reserved.</footer>
       </div>
     </BrowserRouter>

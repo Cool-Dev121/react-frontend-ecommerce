@@ -1,112 +1,60 @@
-export const orderCreateReducer = (state = { success: false }, action) => {
-  switch (action.type) {
-    case 'CREATE_ORDER':
-      return {
-        order: action.payload,
-        success: true,
-      };
-
-    default:
-      return state;
-  }
-};
-
-export const orderDetailsReducer = (
-  state = {
-    order: {
-      orderItems: [],
-      shipping: {},
-      payment: {},
-    },
-    success: false,
-  },
+export const ordersReducer = (
+  state = { orders: [], myOrders: [], order: { cartItems: [], shipping: {}, payment: {} }, success: false },
   action
 ) => {
   switch (action.type) {
-    case 'FETCH_ORDER':
-      return {
-        order: action.payload,
-        success: true,
-      };
-    default:
-      return state;
-  }
-};
-
-export const payOrderReducer = (
-  state = {
-    order: {
-      orderItems: [],
-      shipping: {},
-      payment: {},
-    },
-    success: false,
-  },
-  action
-) => {
-  switch (action.type) {
-    case 'PAY_ORDER':
-      return {
-        order: action.payload,
-        success: true,
-      };
-    default:
-      return state;
-  }
-};
-
-export const deliverOrderReducer = (
-  state = {
-    order: {
-      orderItems: [],
-      shipping: {},
-      payment: {},
-    },
-    success: false,
-  },
-  action
-) => {
-  switch (action.type) {
-    case 'DELIVER_ORDER':
-      return {
-        order: action.payload,
-        success: true,
-      };
-    default:
-      return state;
-  }
-};
-
-export const myOrderListReducer = (state = { orders: [], success: false }, action) => {
-  switch (action.type) {
-    case 'FETCH_MY_ORDERS':
-      return {
-        orders: action.payload,
-        success: true,
-      };
-    default:
-      return state;
-  }
-};
-
-export const orderListReducer = (state = { orders: [], success: false }, action) => {
-  switch (action.type) {
+    // Fetch All Orders
     case 'FETCH_ORDERS':
       return {
+        ...state,
         orders: action.payload,
+      };
+
+    // Fetch My Orders
+    case 'FETCH_MY_ORDERS':
+      return {
+        ...state,
+        myOrders: action.payload,
         success: true,
       };
-    default:
-      return state;
-  }
-};
 
-export const orderDeleteReducer = (state = { order: {}, success: false }, action) => {
-  switch (action.type) {
+    // Fetch An Order
+    case 'FETCH_ORDER':
+      return {
+        ...state,
+        order: action.payload,
+      };
+
+    // Create Order
+    case 'CREATE_ORDER':
+      return {
+        ...state,
+        order: action.payload,
+        success: true,
+      };
+
+    // Delete Order
     case 'DELETE_ORDER':
       return {
+        ...state,
         success: true,
         order: action.payload,
+      };
+
+    // Pay Order
+    case 'PAY_ORDER':
+      return {
+        ...state,
+        order: action.payload,
+        success: true,
+      };
+
+    // Deliver Order
+    case 'DELIVER_ORDER':
+      return {
+        ...state,
+        order: action.payload,
+        success: true,
       };
 
     default:

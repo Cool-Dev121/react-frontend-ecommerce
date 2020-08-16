@@ -6,18 +6,19 @@ import { payOrder, fetchOrder } from '../../actions/orderActions';
 import formatCurrency from '../../util';
 
 const OrderContainer = props => {
-  const orderDetails = useSelector(state => state.orderDetails);
-  const orderPayDetails = useSelector(state => state.payOrder);
-  const { success, order } = orderDetails;
-  const { paySucess } = orderPayDetails;
   const dispatch = useDispatch();
+  const orderDetails = useSelector(state => state.orders);
+  const { success, order } = orderDetails;
 
   useEffect(() => {
+    if (success) {
+      orderDetails.success = false;
+    }
     dispatch(fetchOrder(props.match.params.id));
     return () => {
       //
     };
-  }, [dispatch, paySucess, success, props.match.params.id]);
+  }, [dispatch, orderDetails.success, success, props.match.params.id]);
 
   const payHandler = () => {
     order.isPaid = true;
@@ -25,7 +26,7 @@ const OrderContainer = props => {
     dispatch(payOrder(order));
   };
 
-  return !success ? (
+  return !order.id ? (
     <div>Loading...</div>
   ) : (
     <div>
@@ -37,7 +38,7 @@ const OrderContainer = props => {
           <div>
             <h3>Shipping</h3>
             <div>
-              {order.shipping.address}, {order.shipping.city},{order.shipping.postalCode}, {order.shipping.country}
+              {order.shipping.address}, {order.shipping.city}, {order.shipping.postalCode}, {order.shipping.country}
               <div>
                 <br />
                 <strong>{order.isDelivered ? `Delivered at ${order.deliveredAt}` : 'Not Delivered.'}</strong>
@@ -62,7 +63,7 @@ const OrderContainer = props => {
                 <div>Cart is empty</div>
               ) : (
                 order.cartItems.map(item => (
-                  <li>
+                  <li key={item.product}>
                     <div className='cart-image'>
                       <img src={item.image} alt={item.title} />
                     </div>

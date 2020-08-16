@@ -4,12 +4,11 @@ import { saveShipping } from '../../actions/cartActions';
 import CheckoutSteps from '../../components/CheckoutSteps';
 
 const ShippingContainer = props => {
+  const dispatch = useDispatch();
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [country, setCountry] = useState('');
-
-  const dispatch = useDispatch();
 
   const submitHandler = event => {
     event.preventDefault();

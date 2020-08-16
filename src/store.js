@@ -1,48 +1,22 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import {
-  productListReducer,
-  productDetailsReducer,
-  productSaveReducer,
-  productDeleteReducer,
-  productReviewSaveReducer,
-} from './reducers/productReducers';
+import { productsReducer } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
-import { userSigninReducer, userRegisterReducer, userUpdateReducer } from './reducers/userReducers';
-import {
-  orderCreateReducer,
-  orderDetailsReducer,
-  orderDeleteReducer,
-  myOrderListReducer,
-  orderListReducer,
-  payOrderReducer,
-  deliverOrderReducer,
-} from './reducers/orderReducers';
+import { userReducer } from './reducers/userReducers';
+import { ordersReducer } from './reducers/orderReducers';
 
 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 const userInfo = JSON.parse(localStorage.getItem('userInfo')) || '';
 
-const initalState = { cart: { cartItems, shipping: {}, payment: {} }, userSignin: { userInfo } };
+const initalState = { cart: { cartItems, shipping: {}, payment: {} }, user: { userInfo, orders: [] } };
 
 const store = createStore(
   combineReducers({
-    productList: productListReducer,
-    productDetails: productDetailsReducer,
-    productSave: productSaveReducer,
-    productDelete: productDeleteReducer,
-    productReviewSave: productReviewSaveReducer,
+    products: productsReducer,
     cart: cartReducer,
-    userSignin: userSigninReducer,
-    userRegister: userRegisterReducer,
-    userUpdate: userUpdateReducer,
-    orderCreate: orderCreateReducer,
-    payOrder: payOrderReducer,
-    deliverOrder: deliverOrderReducer,
-    orderDetails: orderDetailsReducer,
-    orderDelete: orderDeleteReducer,
-    myOrderList: myOrderListReducer,
-    orderList: orderListReducer,
+    user: userReducer,
+    orders: ordersReducer,
   }),
   initalState,
   composeWithDevTools(applyMiddleware(thunk))

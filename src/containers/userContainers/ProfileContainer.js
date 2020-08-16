@@ -6,16 +6,15 @@ import { Link } from 'react-router-dom';
 import formatCurrency from '../../util';
 
 const ProfileContainer = props => {
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConformation] = useState('');
-
-  const userSignin = useSelector(state => state.userSignin);
-  const { userInfo } = userSignin;
-
-  const dispatch = useDispatch();
+  const { userInfo } = useSelector(state => state.user);
+  const { success, myOrders } = useSelector(state => state.orders);
+  const myNewOrders = myOrders.filter(order => order.user.id === userInfo.user.id);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -26,10 +25,6 @@ const ProfileContainer = props => {
     e.preventDefault();
     dispatch(update(userInfo.user.id, firstName, lastName, email, password, passwordConfirmation));
   };
-
-  const myOrderList = useSelector(state => state.myOrderList);
-  const { success: successOrders, orders } = myOrderList;
-  const myOrders = orders.filter(order => order.user.id === userInfo.user.id);
 
   useEffect(() => {
     if (userInfo) {
@@ -119,7 +114,7 @@ const ProfileContainer = props => {
       </div>
       <div className='profile-orders content-margined'>
         <h2>Your Orders</h2>
-        {!successOrders ? (
+        {!success ? (
           <div>Loading...</div>
         ) : (
           <table className='table'>
@@ -133,7 +128,7 @@ const ProfileContainer = props => {
               </tr>
             </thead>
             <tbody>
-              {myOrders.map(order => (
+              {myNewOrders.map(order => (
                 <tr key={order.id}>
                   <td>{order.id}</td>
                   <td>{order.created_at.substring(0, 10)}</td>

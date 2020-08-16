@@ -44,7 +44,7 @@ export const update = (userId, first_name, last_name, email, password, password_
     }),
   })
     .then(res => res.json())
-    .then(user => dispatch({ type: 'UPDATE_USER', payload: user }));
+    .then(user => dispatch({ type: 'UPDATE_USER', payload: { user } }));
 };
 
 export const logout = () => dispatch => {
