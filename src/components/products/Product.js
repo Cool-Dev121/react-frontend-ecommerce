@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Rating from '../Rating';
+import Rating from './Rating';
 import { addToCart } from '../../actions/cartActions';
 import { useDispatch } from 'react-redux';
 

@@ -7,9 +7,12 @@ import { userReducer } from './reducers/userReducers';
 import { ordersReducer } from './reducers/orderReducers';
 
 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-const userInfo = JSON.parse(localStorage.getItem('userInfo')) || '';
+const userInfo = JSON.parse(localStorage.getItem('userInfo')) || { shipping: {}, payment: {} };
 
-const initalState = { cart: { cartItems, shipping: {}, payment: {} }, user: { userInfo, orders: [] } };
+const initalState = {
+  cart: { cartItems },
+  user: { userInfo, orders: [] },
+};
 
 const store = createStore(
   combineReducers({

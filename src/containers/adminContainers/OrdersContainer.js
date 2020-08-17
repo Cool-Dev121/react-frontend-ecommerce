@@ -8,6 +8,7 @@ const OrdersContainer = props => {
   const dispatch = useDispatch();
   const orderList = useSelector(state => state.orders);
   const { orders } = orderList;
+  orders.sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
 
   useEffect(() => {
     if (orderList.success) {

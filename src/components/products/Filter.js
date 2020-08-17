@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect, useSelector } from 'react-redux';
-import { filterProducts, sortProducts } from '../actions/productActions';
+import { filterProducts, sortProducts } from '../../actions/productActions';
 
 const Filter = props => {
   const productList = useSelector(state => state.products);

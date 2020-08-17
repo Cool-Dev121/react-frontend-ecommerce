@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { saveShipping } from '../../actions/cartActions';
-import CheckoutSteps from '../../components/CheckoutSteps';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveShipping } from '../../actions/userActions';
+import CheckoutSteps from '../../components/checkout/CheckoutSteps';
 
 const ShippingContainer = props => {
   const dispatch = useDispatch();
@@ -9,10 +9,15 @@ const ShippingContainer = props => {
   const [city, setCity] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [country, setCountry] = useState('');
+  const { userInfo } = useSelector(state => state.user);
+
+  if (userInfo.user.shipping) {
+    props.history.push('/payment');
+  }
 
   const submitHandler = event => {
     event.preventDefault();
-    dispatch(saveShipping({ address, city, postalCode, country }));
+    dispatch(saveShipping(userInfo.user.id, address, city, postalCode, country));
     props.history.push('/payment');
   };
 

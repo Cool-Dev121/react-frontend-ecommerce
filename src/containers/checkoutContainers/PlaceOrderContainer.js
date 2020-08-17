@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CheckoutSteps from '../../components/CheckoutSteps';
+import CheckoutSteps from '../../components/checkout/CheckoutSteps';
 import { createOrder } from '../../actions/orderActions';
 import formatCurrency from '../../util';
 
@@ -11,7 +11,8 @@ const PlaceOrderContainer = props => {
   const cart = useSelector(state => state.cart);
   const orders = useSelector(state => state.orders);
   const { userInfo } = useSelector(state => state.user);
-  const { cartItems, shipping, payment } = cart;
+  const { shipping, payment } = userInfo.user;
+  const { cartItems } = cart;
   const { success, order } = orders;
   const user_id = userInfo.user.id;
 
@@ -51,12 +52,12 @@ const PlaceOrderContainer = props => {
           <div>
             <h3>Shipping</h3>
             <div>
-              {cart.shipping.address}, {cart.shipping.city}, {cart.shipping.postalCode}, {cart.shipping.country}
+              {shipping.address}, {shipping.city}, {shipping.postalCode}, {shipping.country}
             </div>
           </div>
           <div>
             <h3>Payment</h3>
-            <div>Payment Method: {cart.payment.paymentMethod}</div>
+            <div>Payment Method: {payment.paymentMethod}</div>
           </div>
           <div>
             <ul className='cart-list-container'>

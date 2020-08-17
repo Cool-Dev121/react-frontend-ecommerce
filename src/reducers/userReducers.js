@@ -8,8 +8,8 @@ export const userReducer = (state = {}, action) => {
 
     case 'LOGIN_USER':
       localStorage.setItem('userInfo', JSON.stringify(action.payload));
-      console.log(action.payload);
       return {
+        ...state,
         userInfo: action.payload,
       };
 

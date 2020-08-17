@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts, saveProduct, deleteProduct } from '../../actions/productActions';
 import formatCurrency from '../../util';
+import { Link } from 'react-router-dom';
 
 const ProductsContainer = props => {
   const dispatch = useDispatch();
@@ -156,7 +157,7 @@ const ProductsContainer = props => {
           </form>
         ) : (
           <div className='product-list'>
-            <table className='table'>
+            <table className='products-table'>
               <thead>
                 <tr>
                   <th>ID</th>
@@ -171,7 +172,9 @@ const ProductsContainer = props => {
                 {products.map(product => (
                   <tr key={product.id}>
                     <td>{product.id}</td>
-                    <td>{product.name}</td>
+                    <td>
+                      <Link to={`/products/${product.id}`}>{product.name}</Link>
+                    </td>
                     <td>{formatCurrency(product.price)}</td>
                     <td>{product.category}</td>
                     <td>{product.brand}</td>

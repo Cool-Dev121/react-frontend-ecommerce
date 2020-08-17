@@ -14,7 +14,9 @@ const ProfileContainer = props => {
   const [passwordConfirmation, setPasswordConformation] = useState('');
   const { userInfo } = useSelector(state => state.user);
   const { success, myOrders } = useSelector(state => state.orders);
-  const myNewOrders = myOrders.filter(order => order.user.id === userInfo.user.id);
+  const myNewOrders = myOrders
+    .filter(order => order.user.id === userInfo.user.id)
+    .sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
 
   const handleLogout = () => {
     dispatch(logout());

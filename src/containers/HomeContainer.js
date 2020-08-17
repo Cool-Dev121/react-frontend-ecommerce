@@ -1,5 +1,5 @@
 import React from 'react';
-import Filter from '../components/Filter';
+import Filter from '../components/products/Filter';
 import Products from '../components/products/Products';
 import MiniCart from '../components/checkout/MiniCart';
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { detailsProduct, saveProductReview } from '../actions/productActions';
-import Rating from '../components/Rating';
+import Rating from '../components/products/Rating';
 import { addToCart } from '../actions/cartActions';
 
 const ProductContainer = props => {

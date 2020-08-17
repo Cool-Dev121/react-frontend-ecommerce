@@ -450,14 +450,19 @@ input {
 
 .table {
   width: 100%;
-}
-
-th {
-  text-align: left;
+  text-align: center;
 }
 
 tbody > tr:nth-child(odd) {
   background-color: #f0f0f0;
+}
+
+.products-table tbody tr td:nth-child(2) {
+  font-size: 2rem;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-weight: bolder;
+  text-align: center;
 }
 
 /* Checkout Steps */
