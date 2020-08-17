@@ -20,13 +20,10 @@ import ProductsContainer from './containers/adminContainers/ProductsContainer';
 import OrdersContainer from './containers/adminContainers/OrdersContainer';
 
 function App() {
-  const userObject = useSelector(state => state.user);
-  const productList = useSelector(state => state.products);
-  const cart = useSelector(state => state.cart);
-  const { user } = userObject.userInfo;
-  const { products } = productList;
-  const { cartItems } = cart;
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.user.userInfo);
+  const { products } = useSelector(state => state.products);
+  const { cartItems } = useSelector(state => state.cart);
 
   const openMenu = () => {
     document.querySelector('.sidebar').classList.add('open');

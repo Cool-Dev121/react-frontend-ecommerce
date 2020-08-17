@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { detailsProduct, saveProductReview } from '../actions/productActions';
 import Rating from '../components/Rating';
+import { addToCart } from '../actions/cartActions';
 
 const ProductContainer = props => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const ProductContainer = props => {
     return () => {
       //
     };
-  }, [dispatch, productDetails.success, productSaveSuccess, props.match.params.id]);
+  }, [dispatch, productDetails.success, productSaveSuccess, qty, props.match.params.id]);
 
   const submitHandler = e => {
     e.preventDefault();
@@ -37,7 +38,8 @@ const ProductContainer = props => {
   };
 
   const handleAddToCart = () => {
-    props.history.push(`/cart/${props.match.params.id}?qty=${qty}`);
+    dispatch(addToCart(product, qty));
+    props.history.push('/cart');
   };
 
   return (
@@ -83,7 +85,7 @@ const ProductContainer = props => {
                     <select
                       value={qty}
                       onChange={e => {
-                        setQty(e.target.value);
+                        setQty(Number(e.target.value));
                       }}>
                       {[...Array(product.countInStock).keys()].map(x => (
                         <option key={x + 1} value={x + 1}>
