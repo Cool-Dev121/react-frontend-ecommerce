@@ -53,14 +53,14 @@ export const filterProductsByCategory = (products, category) => dispatch => {
 };
 
 export const detailsProduct = productId => dispatch => {
-  fetch(`/products/${productId}`)
+  fetch(`${BASE_URL}/products/${productId}`)
     .then(res => res.json())
     .then(product => dispatch({ type: 'GET_PRODUCT', payload: product }));
 };
 
 export const saveProduct = product => dispatch => {
   if (product.id) {
-    fetch(`/products/${product.id}`, {
+    fetch(`${BASE_URL}/products/${product.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export const saveProduct = product => dispatch => {
       .then(res => res.json())
       .then(product => dispatch({ type: 'SAVE_PRODUCT', payload: product, success: true }));
   } else {
-    fetch(`/products`, {
+    fetch(`${BASE_URL}/products`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export const saveProduct = product => dispatch => {
 };
 
 export const deleteProduct = product => dispatch => {
-  fetch(`/products/${product.id}`, {
+  fetch(`${BASE_URL}/products/${product.id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ export const deleteProduct = product => dispatch => {
 };
 
 export const saveProductReview = (productId, review) => dispatch => {
-  fetch(`/products/${productId}/reviews`, {
+  fetch(`${BASE_URL}/products/${productId}/reviews`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

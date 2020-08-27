@@ -1,5 +1,7 @@
+const BASE_URL = 'https://react-widget-store-api.herokuapp.com/api/v1';
+
 export const signin = (email, password) => dispatch => {
-  fetch('/login', {
+  fetch(`${BASE_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -11,7 +13,7 @@ export const signin = (email, password) => dispatch => {
 };
 
 export const register = (first_name, last_name, email, password, password_confirmation) => dispatch => {
-  fetch('/users', {
+  fetch(`${BASE_URL}/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -29,7 +31,7 @@ export const register = (first_name, last_name, email, password, password_confir
 };
 
 export const update = (userId, first_name, last_name, email, password, password_confirmation) => dispatch => {
-  fetch(`/users/${userId}`, {
+  fetch(`${BASE_URL}/users/${userId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +50,7 @@ export const update = (userId, first_name, last_name, email, password, password_
 };
 
 export const saveShipping = (userId, address, city, postalCode, country) => dispatch => {
-  fetch(`/users/${userId}`, {
+  fetch(`${BASE_URL}/users/${userId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -67,7 +69,7 @@ export const saveShipping = (userId, address, city, postalCode, country) => disp
 };
 
 export const savePayment = (userId, paymentMethod) => dispatch => {
-  fetch(`/users/${userId}`, {
+  fetch(`${BASE_URL}/users/${userId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

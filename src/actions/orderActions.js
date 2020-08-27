@@ -1,5 +1,7 @@
+const BASE_URL = 'https://react-widget-store-api.herokuapp.com/api/v1';
+
 export const createOrder = order => dispatch => {
-  fetch('/orders', {
+  fetch(`${BASE_URL}/orders`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -11,25 +13,25 @@ export const createOrder = order => dispatch => {
 };
 
 export const fetchOrder = orderId => dispatch => {
-  fetch(`/orders/${orderId}`)
+  fetch(`${BASE_URL}/orders/${orderId}`)
     .then(res => res.json())
     .then(order => dispatch({ type: 'FETCH_ORDER', payload: order, success: true }));
 };
 
 export const listMyOrders = () => dispatch => {
-  fetch(`/orders`)
+  fetch(`${BASE_URL}/orders`)
     .then(res => res.json())
     .then(orders => dispatch({ type: 'FETCH_MY_ORDERS', payload: orders, success: true }));
 };
 
 export const fetchOrders = () => dispatch => {
-  fetch(`/orders`)
+  fetch(`${BASE_URL}/orders`)
     .then(res => res.json())
     .then(orders => dispatch({ type: 'FETCH_ORDERS', payload: orders, success: true }));
 };
 
 export const payOrder = order => dispatch => {
-  fetch(`/orders/${order.id}`, {
+  fetch(`${BASE_URL}/orders/${order.id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -41,7 +43,7 @@ export const payOrder = order => dispatch => {
 };
 
 export const deliverOrder = order => dispatch => {
-  fetch(`/orders/${order.id}`, {
+  fetch(`${BASE_URL}/orders/${order.id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -53,7 +55,7 @@ export const deliverOrder = order => dispatch => {
 };
 
 export const deleteOrder = order => dispatch => {
-  fetch(`/orders/${order.id}`, {
+  fetch(`${BASE_URL}/orders/${order.id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
