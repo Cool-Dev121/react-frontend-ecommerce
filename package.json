@@ -1,6 +1,6 @@
 {
   "name": "react-ecommerce-frontend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "proxy": "https://react-widget-store-api.herokuapp.com/api/v1",
   "private": true,
   "dependencies": {
