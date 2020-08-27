@@ -1,5 +1,7 @@
+const BASE_URL = 'https://react-widget-store-api.herokuapp.com/api/v1';
+
 export const fetchProducts = () => dispatch => {
-  fetch(`/products`)
+  fetch(`${BASE_URL}/products`)
     .then(res => res.json())
     .then(products => dispatch({ type: 'FETCH_PRODUCTS', payload: products }));
 };
