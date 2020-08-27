@@ -14,6 +14,7 @@ export const productsReducer = (
     case 'FETCH_PRODUCTS':
       return {
         ...state,
+        product: '',
         products: action.payload,
         filteredProducts: action.payload,
       };

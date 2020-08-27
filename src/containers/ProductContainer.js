@@ -48,7 +48,7 @@ const ProductContainer = props => {
         <Link to='/'>Back to results</Link>
       </div>
 
-      {!product && product.id ? (
+      {!product.id ? (
         <div>Loading...</div>
       ) : (
         <>

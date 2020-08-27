@@ -1,8 +1,9 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { filterProducts, sortProducts } from '../../actions/productActions';
 
 const Filter = props => {
+  const dispatch = useDispatch();
   const productList = useSelector(state => state.products);
   const { category, products, filteredProducts } = productList;
 
@@ -18,13 +19,17 @@ const Filter = props => {
         <div className='filter-result'>{filteredProducts.length} Products</div>
         <div className='filter-search'>
           <form onSubmit={submitHandler}>
-            <input type='text' name='searchKeyword' onChange={e => props.filterProducts(products, e.target.value)} />
+            <input
+              type='text'
+              name='searchKeyword'
+              onChange={e => dispatch(filterProducts(products, e.target.value))}
+            />
             <button type='submit'>Search</button>
           </form>
         </div>
         <div className='filter-sort'>
           Sort By{' '}
-          <select name='sortOrder' onChange={e => props.sortProducts(filteredProducts, e.target.value)}>
+          <select name='sortOrder' onChange={e => dispatch(sortProducts(filteredProducts, e.target.value))}>
             <option value='latest'>Latest</option>
             <option value='lowest'>Lowest</option>
             <option value='highest'>Highest</option>
@@ -42,4 +47,4 @@ const Filter = props => {
   );
 };
 
-export default connect(null, { filterProducts, sortProducts })(Filter);
+export default Filter;
