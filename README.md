@@ -2,6 +2,15 @@
 
 The React Widget Store is an E-Commerce site made with React and Redux for the frontend and Ruby on Rails for the backend. The site has full user support with registering and signing in. A user can view, review, and purchase items! A user will add items to their cart, proceed through the checkout wizard and place an order that is persisted to the backend.
 
+## Preview of Homepage
+<img src="https://i.imgur.com/JA4inMl.png" />
+
+## Preview of Product Page
+<img src="https://i.imgur.com/6PZHacJ.png" />
+
+## Preview of Create A Product Modal
+<img src="https://i.imgur.com/Dc8V7Wp.png" />
+
 ## Usage
 
 **NOTE: It is required to get the [backend](https://github.com/Xearta/react-ecommerce-backend) and follow those instructions as well.**
